@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:login_firebase_2/screens/singin_screen.dart';
+import 'package:login_firebase_2/screens/signin_screen.dart';
 
-void main() {
-  runApp(const MainApp());
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MainApp());  
+  
 }
 
 class MainApp extends StatelessWidget {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//imagen pantalla login
 Image logoWidget(String imageName){
   return Image.asset(
     imageName,
@@ -10,6 +11,7 @@ Image logoWidget(String imageName){
   );
 }
 
+//Textfiel correo y contraseña
 TextField reusableTextField (String text, IconData icon, bool isPassworType,
   TextEditingController controller){
     return TextField(
@@ -33,6 +35,37 @@ TextField reusableTextField (String text, IconData icon, bool isPassworType,
           borderRadius: BorderRadius.circular(30.0),
           borderSide: const BorderSide(width: 0, style: BorderStyle.none)),
     ),
-    keyboardType: isPassworType ? TextInputType.visiblePassword : TextInputType(),
+    keyboardType: isPassworType 
+        ? TextInputType.visiblePassword 
+        : TextInputType.emailAddress,
   );
-  }
+}
+
+Container signInSignUpButton (BuildContext context, bool isLogin, Function onTap){
+  return Container(
+    width: MediaQuery.of(context).size.width ,
+    height: 50,
+    margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+    decoration: BoxDecoration( borderRadius: BorderRadius.circular(90)),
+    child: ElevatedButton(
+      onPressed: (){
+        onTap(); 
+      }, 
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.pressed)) {
+            return Colors.black26; // pressed background color
+          }
+          return Colors.white;
+        }),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(30))),
+      ),
+      child: Text(
+        isLogin ? "LOG IN" : "REGISTRARSE",
+        style: const TextStyle(
+          color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 16),
+      ),
+    ),
+  );
+}
